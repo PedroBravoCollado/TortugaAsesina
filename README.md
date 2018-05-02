@@ -5,4 +5,4 @@ Proyecto Battlebots
 Marian Mazurett
 Pedro Bravo
 Bryan Ortiz
-Niño FAU
+Sebastián Magaña
