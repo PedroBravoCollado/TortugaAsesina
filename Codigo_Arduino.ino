@@ -19,46 +19,48 @@ void loop() {
     Serial.println(entry);
     
     //AVANZAR
-    if (entry == 'A') {
+    if (entry == 'U') { //Up
       digitalWrite(pinLx, LOW);
       digitalWrite(pinLy, HIGH);
       digitalWrite(pinRx, LOW);
       digitalWrite(pinRy, HIGH);
-      Serial.println("Moving Back");
+      Serial.println("Moving Forward");
     }
     //RETROCEDER
-    if (entry == 'R') {
+    if (entry == 'D') { //Down
       digitalWrite(pinLx, HIGH);
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, HIGH);
       digitalWrite(pinRy, LOW);
-      Serial.println("Moving Forward");
-    }
-    //LEFT
-    if (entry == 'L') {
-      digitalWrite(pinLx, LOW);
-      digitalWrite(pinLy, HIGH);
-      digitalWrite(pinRx, HIGH);
-      digitalWrite(pinRy, LOW);
-      Serial.println("Turning Left");
+      Serial.println("Moving Back");
     }
     //RIGHT
-    if (entry == 'R') {
+    if (entry == 'R') { //Right
       digitalWrite(pinLx, HIGH);
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, LOW);
       digitalWrite(pinRy, HIGH);
       Serial.println("Turning Right");
     }
+    //LEFT
+    if (entry == 'L') { //Left
+      digitalWrite(pinLx, LOW);
+      digitalWrite(pinLy, HIGH);
+      digitalWrite(pinRx, HIGH);
+      digitalWrite(pinRy, LOW);
+      Serial.println("Turning Left");
+    }
     //STOP
-    if (entry == 'S') {
+    if (entry == 'S') { //Stop
       digitalWrite(pinLx, LOW);
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, LOW);
       digitalWrite(pinRy, LOW);
       Serial.println("Stop");
     }
+    
     //LED TESTING
+    /*
     if (entry == 'H') { //Si es H prender LED
       digitalWrite(13, HIGH);
       Serial.println("LED ON");
@@ -66,6 +68,7 @@ void loop() {
       digitalWrite(13, LOW);
       Serial.println("LED OFF");
     }
+    */
     delay(1000);
   }
 }
