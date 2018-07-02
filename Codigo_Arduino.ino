@@ -3,9 +3,9 @@ char passA[10] = "1234"; //Nueva Password
 char baud = '4'; //4 = 9600 baud
 
 //Ruedas
-int pinLx = 8;
-int pinLy = 10;
-int pinRx = 5;
+int pinLx = 4;
+int pinLy = 5;
+int pinRx = 6;
 int pinRy = 7;
 
 void setup() {
@@ -17,9 +17,15 @@ void loop() {
   if (Serial.available() >= 1) {
     char entry = Serial.read(); // Leer caracter
     Serial.println(entry);
-    
+
+    //W -> Avanzar
+    //A -> Izquierda
+    //S -> Retroceder
+    //D -> Derecha
+    //s -> Detenerse
+
     //AVANZAR
-    if (entry == 'U') { //Up
+    if (entry == 'W') {
       digitalWrite(pinLx, LOW);
       digitalWrite(pinLy, HIGH);
       digitalWrite(pinRx, LOW);
@@ -27,7 +33,7 @@ void loop() {
       Serial.println("Moving Forward");
     }
     //RETROCEDER
-    if (entry == 'D') { //Down
+    if (entry == 'S') { //Retroceder
       digitalWrite(pinLx, HIGH);
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, HIGH);
@@ -35,7 +41,7 @@ void loop() {
       Serial.println("Moving Back");
     }
     //RIGHT
-    if (entry == 'R') { //Right
+    if (entry == 'D') { //Right
       digitalWrite(pinLx, HIGH);
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, LOW);
@@ -43,7 +49,7 @@ void loop() {
       Serial.println("Turning Right");
     }
     //LEFT
-    if (entry == 'L') { //Left
+    if (entry == 'A') { //Left
       digitalWrite(pinLx, LOW);
       digitalWrite(pinLy, HIGH);
       digitalWrite(pinRx, HIGH);
@@ -51,7 +57,7 @@ void loop() {
       Serial.println("Turning Left");
     }
     //STOP
-    if (entry == 'S') { //Stop
+    if (entry == 's') { //Stop
       digitalWrite(pinLx, LOW);
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, LOW);
