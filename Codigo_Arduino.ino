@@ -3,10 +3,10 @@ char passA[10] = "1234"; //Nueva Password
 char baud = '4'; //4 = 9600 baud
 
 //Ruedas
-int pinLx = 4;
-int pinLy = 5;
-int pinRx = 6;
-int pinRy = 7;
+int pinLx = 4; // Conectado a IN4 de Puente H
+int pinLy = 5; // Conectado a IN3 de Puente H
+int pinRx = 6; // Conectado a IN2 de Puente H
+int pinRy = 7; // Conectado a IN1 de Puente H
 
 void setup() {
   Serial.begin(9600); //Iniciar Serial
@@ -30,7 +30,7 @@ void loop() {
       digitalWrite(pinLy, HIGH);
       digitalWrite(pinRx, LOW);
       digitalWrite(pinRy, HIGH);
-      Serial.println("Moving Forward");
+      Serial.println("Avanza");
     }
     //RETROCEDER
     if (entry == 'S') { //Retroceder
@@ -38,7 +38,7 @@ void loop() {
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, HIGH);
       digitalWrite(pinRy, LOW);
-      Serial.println("Moving Back");
+      Serial.println("Retrocede");
     }
     //RIGHT
     if (entry == 'D') { //Right
@@ -46,7 +46,7 @@ void loop() {
       digitalWrite(pinLy, LOW);
       digitalWrite(pinRx, LOW);
       digitalWrite(pinRy, HIGH);
-      Serial.println("Turning Right");
+      Serial.println("Derecha");
     }
     //LEFT
     if (entry == 'A') { //Left
@@ -54,7 +54,7 @@ void loop() {
       digitalWrite(pinLy, HIGH);
       digitalWrite(pinRx, HIGH);
       digitalWrite(pinRy, LOW);
-      Serial.println("Turning Left");
+      Serial.println("Izquierda");
     }
     //STOP
     if (entry == 's') { //Stop
@@ -66,7 +66,7 @@ void loop() {
     }
     
     //LED TESTING
-    /*
+    
     if (entry == 'H') { //Si es H prender LED
       digitalWrite(13, HIGH);
       Serial.println("LED ON");
@@ -74,7 +74,7 @@ void loop() {
       digitalWrite(13, LOW);
       Serial.println("LED OFF");
     }
-    */
-    delay(1000);
+    
+    delay(500);
   }
 }
