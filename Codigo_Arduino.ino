@@ -1,6 +1,11 @@
-char nameA[10] = "Sherman"; //Nombre del Modulo
+#include <SoftwareSerial.h>
+
+char nameA[10] = "Arduino"; //Nombre del Modulo
 char passA[10] = "1234"; //Nueva Password
-char baud = '4'; //4 = 9600 baud
+//char baud = '4'; //4 = 9600 baud
+
+// bt
+SoftwareSerial mySerial(3, 2); // RX, TX
 
 //Ruedas
 int pinLx = 8;  // Conectado a IN4 de Puente H
@@ -12,88 +17,70 @@ int pinRy = 11; // Conectado a IN1 de Puente H
 int pinSx = 6; // Conectado a IN1 de Puente H
 int pinSy = 7; // Conectado a IN2 de Puente H
 
-//Led
-int pinLed = 12; 
-
 void setup() {
+  mySerial.begin(9600);
   Serial.begin(9600); //Iniciar Serial
   pinMode(13, OUTPUT); //Pin de Salida
-
-  digitalWrite(pinLed, HIGH); //Indica que esta encendido :)
+  pinMode(pinLx, OUTPUT); //Pin de Salida
+  pinMode(pinLy, OUTPUT); //Pin de Salida
+  pinMode(pinRx, OUTPUT); //Pin de Salida
+  pinMode(pinRy, OUTPUT); //Pin de Salida
 }
 
 void loop() {
-  if (Serial.available() >= 1) {
-    char entry = Serial.read(); // Leer caracter
+  if (mySerial.available() >= 1) {
+    char entry = mySerial.read(); // Leer caracter
     Serial.println(entry);
 
     //W -> Avanzar
     //A -> Izquierda
     //S -> Retroceder
     //D -> Derecha
-    //P -> Detenerse
-    
-    //C -> Cortar
-    //N -> No cortar(?)
-    
-    switch(entry){
-      
-      case 'W':
-        digitalWrite(pinLx, LOW);
-        digitalWrite(pinLy, HIGH);
-        digitalWrite(pinRx, LOW);
-        digitalWrite(pinRy, HIGH);
-        Serial.println("(W) Avanza");
-      break;
+    //s -> Detenerse
 
-      case 'S':
-        digitalWrite(pinLx, HIGH);
-        digitalWrite(pinLy, LOW);
-        digitalWrite(pinRx, HIGH);
-        digitalWrite(pinRy, LOW);
-        Serial.println("(S) Retrocede");
-      break;
-
-      case 'A':
-        digitalWrite(pinLx, LOW);
-        digitalWrite(pinLy, HIGH);
-        digitalWrite(pinRx, HIGH);
-        digitalWrite(pinRy, LOW);
-        Serial.println("(A) Izquierda");
-      break;
-
-      case 'D':
-        digitalWrite(pinLx, HIGH);
-        digitalWrite(pinLy, LOW);
-        digitalWrite(pinRx, LOW);
-        digitalWrite(pinRy, HIGH);
-        Serial.println("(D) Derecha");
-      break;
-
-      case 'P':
-        digitalWrite(pinLx, LOW);
-        digitalWrite(pinLy, LOW);
-        digitalWrite(pinRx, LOW);
-        digitalWrite(pinRy, LOW);
-        Serial.println("(P) Para");
-      break;
-
-      case 'C':
-        digitalWrite(pinSx, LOW);
-        digitalWrite(pinSy, HIGH);
-        Serial.println("(C) Cortar - ¡Al ataque!");
-      break;
-
-      case 'N':
-        digitalWrite(pinSx, LOW);
-        digitalWrite(pinSy, LOW);
-        Serial.println("(N) No Cortar - Modo Pasivo");
-      break;
-      
+    //AVANZAR
+    if (entry == 'W') {
+      digitalWrite(pinLx, LOW);
+      digitalWrite(pinLy, HIGH);
+      digitalWrite(pinRx, LOW);
+      digitalWrite(pinRy, HIGH);
+      Serial.println("Moving Forward");
+    }
+    //RETROCEDER
+    if (entry == 'S') { //Retroceder
+      digitalWrite(pinLx, HIGH);
+      digitalWrite(pinLy, LOW);
+      digitalWrite(pinRx, HIGH);
+      digitalWrite(pinRy, LOW);
+      Serial.println("Moving Back");
+    }
+    //RIGHT
+    if (entry == 'D') { //Right
+      digitalWrite(pinLx, HIGH);
+      digitalWrite(pinLy, LOW);
+      digitalWrite(pinRx, LOW);
+      digitalWrite(pinRy, HIGH);
+      Serial.println("Turning Right");
+    }
+    //LEFT
+    if (entry == 'A') { //Left
+      digitalWrite(pinLx, LOW);
+      digitalWrite(pinLy, HIGH);
+      digitalWrite(pinRx, HIGH);
+      digitalWrite(pinRy, LOW);
+      Serial.println("Turning Left");
+    }
+    //STOP
+    if (entry == 'P') { //Stop
+      digitalWrite(pinLx, LOW);
+      digitalWrite(pinLy, LOW);
+      digitalWrite(pinRx, LOW);
+      digitalWrite(pinRy, LOW);
+      Serial.println("Stop");
     }
     
     //LED TESTING
-    
+  
     if (entry == 'H') { //Si es H prender LED
       digitalWrite(13, HIGH);
       Serial.println("LED ON");
@@ -102,6 +89,6 @@ void loop() {
       Serial.println("LED OFF");
     }
     
-    delay(500);
+    delay(100);
   }
 }
