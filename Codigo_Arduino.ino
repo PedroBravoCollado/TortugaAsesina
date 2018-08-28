@@ -25,6 +25,7 @@ void setup() {
   pinMode(pinLy, OUTPUT); //Pin de Salida
   pinMode(pinRx, OUTPUT); //Pin de Salida
   pinMode(pinRy, OUTPUT); //Pin de Salida
+  digitalWrite(12, HIGH); //LED
 }
 
 void loop() {
@@ -79,6 +80,18 @@ void loop() {
       Serial.println("Stop");
     }
     
+    if (entry == 'C') {
+       digitalWrite(pinSx, LOW);
+       digitalWrite(pinSy, HIGH);
+       Serial.println("(C) Cortar - ¡Al ataque!");
+    }
+     
+    if (entry == 'N') {
+       digitalWrite(pinSx, LOW);
+       digitalWrite(pinSy, LOW);
+       Serial.println("(N) No Cortar - Modo Pasivo");
+    }
+     
     //LED TESTING
   
     if (entry == 'H') { //Si es H prender LED
